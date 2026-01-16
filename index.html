@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICITY - A plataforma de visibilidade local para negócios da cidade</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* PROBLEMA */
+        .problema {
+            background-color: white;
+        }
+        
+        .problema h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .problema-intro {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .problema-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .problema-box {
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .problema-box h3 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .destaque-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .destaque-box p {
+            font-size: 1.3em;
+            color: #856404;
+            font-weight: 600;
+        }
+        
+        /* SOLUÇÃO */
+        .solucao {
+            background-color: #f8f9fa;
+        }
+        
+        .solucao h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .solucao-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        .mockup-container {
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        
+        .phone-3d {
+            width: 280px;
+            height: 560px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateY(-15deg); }
+            50% { transform: translateY(-20px) rotateY(-15deg); }
+        }
+        
+        .phone-frame {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.3),
+                inset 0 0 0 2px rgba(255,255,255,0.1);
+            position: relative;
+        }
+        
+        .phone-notch {
+            width: 120px;
+            height: 25px;
+            background: #000;
+            border-radius: 0 0 15px 15px;
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .screen-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #999;
+        }
+        
+        .phone-buttons {
+            position: absolute;
+            right: -3px;
+            top: 120px;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+            border-radius: 0 2px 2px 0;
+        }
+        
+        .phone-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.1) 0%,
+                transparent 50%
+            );
+            border-radius: 40px;
+            pointer-events: none;
+        }
+        
+        .solucao-text h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+        
+        .solucao-text p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .solucao-text strong {
+            color: #2c3e50;
+        }
+        
+        .solucao-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+        
+        .solucao-list li {
+            padding: 12px 0;
+            font-size: 1.1em;
+            color: #555;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .solucao-list li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* COMO FUNCIONA */
+        .como-funciona {
+            background-color: white;
+            text-align: center;
+        }
+        
+        .como-funciona h2 {
+            font-size: 2.2em;
+            margin-bottom: 60px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .step {
+            padding: 30px 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .step p {
+            font-size: 0.95em;
+            color: #666;
+        }
+        
+        .como-funciona-footer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer-item {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        /* MODELO */
+        .modelo {
+            background-color: #f8f9fa;
+        }
+        
+        .modelo h2 {
+            font-size: 2.2em;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .planos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .plano-card {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+        }
+        
+        .plano-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+        }
+        
+        .plano-gratuito {
+            border-color: #95a5a6;
+        }
+        
+        .plano-basico {
+            border-color: #3498db;
+        }
+        
+        .plano-destaque {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+        }
+        
+        .plano-destaque .badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        
+        .plano-premium {
+            border-color: #764ba2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .plano-premium h3,
+        .plano-premium .preco,
+        .plano-premium .descricao,
+        .plano-premium ul li {
+            color: white;
+        }
+        
+        .plano-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .preco {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .plano-gratuito .preco {
+            color: #95a5a6;
+        }
+        
+        .plano-basico .preco {
+            color: #3498db;
+        }
+        
+        .plano-premium .preco {
+            color: white;
+        }
+        
+        .descricao {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .plano-card ul {
+            list-style: none;
+            text-align: left;
+            margin-top: 15px;
+        }
+        
+        .plano-card ul li {
+            padding: 8px 0;
+            font-size: 0.9em;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .plano-card ul li:before {
+            content: "• ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        /* FOCO */
+        .foco {
+            background-color: white;
+            text-align: center;
+        }
+        
+        .foco h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+        }
+        
+        .foco-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .foco-destaque {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 40px;
+            border-left: 4px solid #667eea;
+        }
+        
+        /* PARCEIROS */
+        .parceiros {
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        
+        .parceiros h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+        }
+        
+        .parceiros-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .parceiros-content p {
+            margin-bottom: 20px;
+        }
+        
+        .parceiros-destaque {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        
+        .parceiros-destaque p {
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+        
+        /* CTA FINAL */
+        .cta-final {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta-final h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .cta-final p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-button-light {
+            display: inline-block;
+            padding: 18px 50px;
+            background-color: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2em;
+            transition: transform 0.2s;
+        }
+        
+        .cta-button-light:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* FOOTER */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        /* RESPONSIVO */
+        @media (max-width: 968px) {
+            .steps,
+            .planos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            
+            .problema-content,
+            .solucao-content,
+            .steps,
+            .planos-grid,
+            .como-funciona-footer {
+                grid-template-columns: 1fr;
+            }
+            
+            .phone-3d {
+                width: 240px;
+                height: 480px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Seu comércio está sendo lembrado no momento da decisão?</h1>
+            <p>Mais presença. Mais decisão. Mais posição.</p>
+            <a href="#contato" class="cta-button">Quero entender como funciona</a>
+        </div>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section class="problema">
+        <div class="container">
+            <h2>O problema real (sem enfeite)</h2>
+            <p class="problema-intro">Hoje, o maior problema do comércio local não é produto, nem preço.<br>É não ser lembrado no momento da decisão.</p>
+            
+            <div class="problema-content">
+                <div class="problema-box">
+                    <h3>Redes sociais não entregam</h3>
+                    <p>O cliente não fica rolando feed procurando onde comprar. Ele quer achar rápido.</p>
+                </div>
+                <div class="problema-box">
+                    <h3>Anúncios são caros e genéricos</h3>
+                    <p>Você investe, mas compete com o Brasil inteiro. Cadê o retorno local?</p>
+                </div>
+            </div>
+            
+            <div class="problema-content" style="margin-top: 20px;">
+                <div class="problema-box">
+                    <h3>O cliente não sabe onde comprar</h3>
+                    <p>Ele precisa, mas não lembra de você. Aí vai no primeiro que aparece.</p>
+                </div>
+                <div class="problema-box">
+                    <h3>Quem não aparece, fica fora da escolha</h3>
+                    <p>Simples assim. Se você não está visível, você não existe na hora H.</p>
+                </div>
+            </div>
+            
+            <div class="destaque-box">
+                <p>Visibilidade local virou vantagem competitiva.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUÇÃO -->
+    <section class="solucao">
+        <div class="container">
+            <h2>A solução</h2>
+            <div class="solucao-content">
+                <div class="mockup-container">
+                    <div class="phone-3d">
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen">
+                                <div class="screen-placeholder">
+                                    <!-- INSERIR SCREENSHOT DO APP - TELA INICIAL COM CATEGORIAS -->
+                                    <p>📱</p>
+                                    <p>Tela do app mostrando as categorias da cidade</p>
+                                </div>
+                            </div>
+                            <div class="phone-shine"></div>
+                        </div>
+                        <div class="phone-buttons"></div>
+                    </div>
+                </div>
+                <div class="solucao-text">
+                    <h3>O que é o ICITY?</h3>
+                    <p>O Icity é uma plataforma focada exclusivamente no comércio local.</p>
+                    <p>Ela reúne as empresas da cidade em um único lugar, facilitando para quem já está procurando onde comprar.</p>
+                    <p><strong>Não é rede social.</strong><br>
+                    <strong>Não é anúncio genérico.</strong><br>
+                    <strong>É direcionamento de decisão.</strong></p>
+                    <p>Quem aparece no momento da busca, entra no jogo.</p>
+                    
+                    <ul class="solucao-list">
+                        <li>Presença digital local</li>
+                        <li>Organização por categoria</li>
+                        <li>Visibilidade para quem entra primeiro</li>
+                        <li>Destaque para quem quer aparecer mais</li>
+                        <li>Plataforma focada em decisão, não em curtida</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="como-funciona">
+        <div class="container">
+            <h2>Como funciona (simples)</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>O cliente abre o aplicativo</h3>
+                    <p>Quando ele precisa de algo na cidade</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Escolhe a categoria</h3>
+                    <p>Restaurante, loja, serviço, etc.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Visualiza empresas da cidade</h3>
+                    <p>Vê as opções disponíveis localmente</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Decide onde comprar</h3>
+                    <p>Escolhe e vai direto ao ponto</p>
+                </div>
+            </div>
+            
+            <div class="como-funciona-footer">
+                <div class="footer-item">Sem distração</div>
+                <div class="footer-item">Sem feed infinito</div>
+                <div class="footer-item">Sem concorrência de fora da cidade</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODELO DE PARTICIPAÇÃO -->
+    <section class="modelo">
+        <div class="container">
+            <h2>Planos disponíveis</h2>
+            
+            <div class="planos-grid">
+                <div class="plano-card plano-gratuito">
+                    <h3>Gratuito</h3>
+                    <div class="preco">R$ 0</div>
+                    <div class="descricao">Presença Básica</div>
+                    <ul>
+                        <li>Nome da empresa</li>
+                        <li>Categoria</li>
+                        <li>Endereço</li>
+                        <li>Aparece no app sem destaque</li>
+                        <li>Ordem padrão</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 0.9em; color: #666; font-style: italic;">Ideal para existir, não para competir.</p>
+                </div>
+                
+                <div class="plano-card plano-basico">
+                    <h3>Básico</h3>
+                    <div class="preco">R$ 97<span style="font-size: 0.5em;">/mês</span></div>
+                    <div class="descricao">Presença Completa</div>
+                    <ul>
+                        <li>Perfil completo</li>
+                        <li>Melhor posição que o gratuito</li>
+                        <li>Presença visível na categoria</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 0.9em; color: #666; font-style: italic;">Para quem quer começar a aparecer.</p>
+                </div>
+                
+                <div class="plano-card plano-destaque">
+                    <div class="badge">MAIS ESCOLHIDO</div>
+                    <h3>Destaque</h3>
+                    <div class="preco">R$ 197<span style="font-size: 0.5em;">/mês</span></div>
+                    <div class="descricao">Prioridade na Categoria</div>
+                    <ul>
+                        <li>Prioridade na categoria</li>
+                        <li>Mais visibilidade</li>
+                        <li>Melhor posição de exibição</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 0.9em; color: #666; font-style: italic;">Plano mais escolhido por empresas no início.</p>
+                </div>
+                
+                <div class="plano-card plano-premium">
+                    <h3>Premium</h3>
+                    <div class="preco">R$ 297<span style="font-size: 0.5em;">/mês</span></div>
+                    <div class="descricao">Domínio da Categoria</div>
+                    <ul>
+                        <li>Destaque máximo</li>
+                        <li>Primeiras posições</li>
+                        <li>Domínio da categoria</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.9; font-style: italic;">Para quem quer liderança local.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOCO NA CIDADE -->
+    <section class="foco">
+        <div class="container">
+            <h2>Feito cidade por cidade</h2>
+            <div class="foco-content">
+                <p>O ICITY não é um marketplace genérico nacional.</p>
+                <p>É uma ferramenta local, feita sob medida para cada cidade.</p>
+                
+                <div class="foco-destaque">
+                    <p><strong>Quando o morador abre o app, ele vê apenas as empresas da cidade dele.</strong></p>
+                    <p style="margin-top: 15px;">Sem confusão. Sem empresas de fora. Só o comércio local organizado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARCEIROS FUNDADORES -->
+    <section class="parceiros">
+        <div class="container">
+            <h2>Parceiros Fundadores</h2>
+            <div class="parceiros-content">
+                <p>O Icity está sendo construído cidade por cidade, com empresas locais.</p>
+                <p>Quem entra agora participa da fase inicial e cresce junto com a plataforma.</p>
+                
+                <div class="parceiros-destaque">
+                    <p>Não é sobre entrar primeiro por impulso.</p>
+                    <p style="margin-top: 15px;"><strong>É sobre ocupar posição antes que ela seja tomada.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Vamos conversar sobre o seu negócio?</h2>
+            <p>Entenda como o ICITY pode posicionar sua empresa na cidade.</p>
+            <a href="#contato" class="cta-button-light">Quero entender se faz sentido para meu negócio</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ICITY - A plataforma de visibilidade local. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
